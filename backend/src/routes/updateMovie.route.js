@@ -1,7 +1,8 @@
 const express = require('express');
-const userIdentifyMiddleWare = require('../middlewares/userIdentify.middleware');
 const updateMovieRouter = express.Router();
+const userIdentifyMiddleWare = require('../middlewares/userIdentify.middleware');
+const updateMovieController = require('../controllers/updateMovie.controller');
 
-updateMovieRouter.patch('/update/:movieId', userIdentifyMiddleWare, updateMovieController);
+updateMovieRouter.patch('/movies/update/:movieId', userIdentifyMiddleWare, updateMovieController);
 
 module.exports = updateMovieRouter;

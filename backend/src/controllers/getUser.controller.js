@@ -8,7 +8,6 @@ const userGettingController = async (req, res) => {
         });
     }
     const users = await authModel.find()
-    res.send(users);
     res.status(200).json({
         message: "user geeting success",
         users

@@ -7,12 +7,14 @@ const cookieParser = require('cookie-parser');
 const movieRouter = require('./routes/movies.route');
 const getUserRouter = require('./routes/getUser.route');
 const getMovieRouter = require('./routes/getMovies.route');
+const updateMovieRouter = require('./routes/updateMovie.route');
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors());
 app.use('/', authRouter);
 app.use('/', movieRouter);
-app.use('/', getUserRouter)
-app.use('/', getMovieRouter)
+app.use('/', getUserRouter);
+app.use('/', getMovieRouter);
+app.use('/', updateMovieRouter)
 connectToDB()
 module.exports = app;
