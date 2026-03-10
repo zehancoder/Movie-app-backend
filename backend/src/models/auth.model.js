@@ -13,6 +13,10 @@ const authSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'password is required']
+    },
+    role: {
+        type: String,
+        default: 'user'
     }
 });
 const authModel = mongoose.model('authentication', authSchema);
