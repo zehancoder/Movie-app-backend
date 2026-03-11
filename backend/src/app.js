@@ -10,8 +10,13 @@ const getMovieRouter = require('./routes/getMovies.route');
 const updateMovieRouter = require('./routes/updateMovie.route');
 const movieDeleteRouter = require('./routes/movieDelete.route');
 app.use(express.json());
-app.use(cookieParser())
-app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend URL
+    credentials: true
+  })
+);
 app.use('/', authRouter);
 app.use('/', movieRouter);
 app.use('/', getUserRouter);

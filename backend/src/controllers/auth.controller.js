@@ -23,7 +23,12 @@ const authController = async (req, res) => {
     const token = jwt.sign({
         id: newUser._id
     }, process.env.JWT_SECRET);
-    res.cookie('token', token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false,
+        maxAge: 24 * 60 * 60 * 1000
+    });
 
     res.status(201).json({
         message: "You Register successfully",
