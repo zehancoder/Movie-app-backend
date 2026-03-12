@@ -1,12 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-/* From Uiverse.io by HarryHeywood04 */ 
-/* From Uiverse.io by jaykdoe */ 
+/* From Uiverse.io by HarryHeywood04 */
+/* From Uiverse.io by jaykdoe */
 .bg-animation {
   height: 100%;
   width: 100%;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
+}
+
+body {
+  background: black;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+@theme {
+  --font-montserrat: font-family: "Montserrat", sans-serif;
+}
+
+
+.linear-bg:hover {
+  background: linear-gradient(90deg, #0048FF 0%, #FE52FB 100%);
+}
+
+.linear-bg-noHover {
+  background: linear-gradient(90deg, #0048FF 0%, #FE52FB 100%);
+
+}
+
+.linear-bg-noHover:hover {
+  background: linear-gradient(90deg, #FE52FB 0%, #0048FF 100%);
+
+}
+
+.nav-links:hover {
+  background: linear-gradient(90deg, #0048FF 0%, #FE52FB 100%);
+}
+
+.nav-links:hover .link-icons {
+  color: #DEF7FF;
+}
+
+.navber-hover-effect {
+  @apply flex items-center gap-2 px-3 text-[14px] font-medium md:text-[15px] rounded-full border border-[#b5b5b54b] hover:border-none cursor-pointer py-1.5
 }
 
 #stars {
@@ -716,6 +754,7 @@
     1954px 838px #fff;
   animation: animStar 50s linear infinite;
 }
+
 #stars:after {
   content: " ";
   position: absolute;
@@ -1633,6 +1672,7 @@
     314px 739px #fff;
   animation: animStar 100s linear infinite;
 }
+
 #stars2:after {
   content: " ";
   position: absolute;
@@ -1950,6 +1990,7 @@
     287px 1272px #fff;
   animation: animStar 150s linear infinite;
 }
+
 #stars3:after {
   content: " ";
   position: absolute;
@@ -2077,6 +2118,7 @@
   transform: translateY(30px);
   animation: introFadeUp 1.2s ease-out forwards;
 }
+
 #title span {
   background: -webkit-linear-gradient(white, #38495a);
   -webkit-background-clip: text;
@@ -2087,6 +2129,7 @@
   from {
     transform: translateY(0px);
   }
+
   to {
     transform: translateY(-2000px);
   }
@@ -2097,9 +2140,9 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
