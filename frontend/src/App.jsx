@@ -9,6 +9,7 @@ import { getCurrentLogin } from './features/getCurrentLogin/user.find'
 import { loginErrMsg, loginUserSuccess } from './toolkit/slice'
 import { useNavigate } from 'react-router';
 import 'react-loading-skeleton/dist/skeleton.css'
+import Footer from './components/Footer'
 
 function App() {
   const dispatch = useDispatch();
@@ -34,20 +35,24 @@ function App() {
     navigate('/')
   }, [currentUser])
   return (
-    <div class=" w-full h-screen overflow-hidden font-montserrat ">
+    <div class="w-full h-screen overflow-hidden font-montserrat ">
       {/* <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div> */}
       <div className='z-50 flex h-full  w-full'>
-        <div className=' lg:w-[22%] lg:static transform lg:translate-0 -translate-x-full absolute left-0 top-0 xl:w-[20%] h-full px-8 py-9 bg-[#1B1B1B]'>
+        <div className=' lg:w-[22%] lg:static transform lg:translate-0 -translate-x-full absolute left-0 top-0 xl:w-[18%] h-full px-8 py-9 bg-[#1B1B1B]'>
           <Leftmenu />
         </div>
-        <div className='w-full h-full scroll-smooth overflow-scroll overflow-x-hidden '>
+        <div className='w-full h-full scroll-smooth overflow-scroll overflow-x-hidden'>
           <Navber />
           <div className='h-24'>
             <button onClick={() => dispatch()}></button>
           </div>
-          <Routing />
+          <div>
+            <Routing />
+            <Footer/>
+          </div>
+          
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { MdPermContactCalendar } from "react-icons/md";
 
 function Leftmenu() {
     return (
-        <div className='w-full  '>
+        <div className='w-full'>
             <div>
                 <img className='w-[140px]' src="https://ticstube-html.temptics.com/assets/img/logo-white.svg" alt="" />
             </div>

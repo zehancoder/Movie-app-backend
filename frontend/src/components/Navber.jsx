@@ -20,7 +20,7 @@ function Navber() {
     }, [currentUser]);
 
     return (
-        <div id='navber' className={`bg-black px-2 md:px-4 py-5 md:py-7 fixed z-40 w-full lg:w-[80.5%] `}>
+        <div id='navber' className={`bg-black px-2 md:px-4 py-5 md:py-7 fixed z-40 w-full lg:w-[83%] `}>
             <div className='text-[#EBEBEB] flex items-center justify-between gap-5'>
 
                 <div className='md:hidden block'>

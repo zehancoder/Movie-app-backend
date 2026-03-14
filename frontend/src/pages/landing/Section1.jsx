@@ -95,7 +95,7 @@ function Section1() {
 
 
   return (
-    currentUser.message && <div className='px-3 md:px-5 py-2 md:py-3 mt-5 h-[80%] pb-16'>
+    currentUser.message && <div className='px-3 md:px-5 py-2 md:py-3 mt-5 md:h-[620px] h-[450px] lg:h-[770px] md:pb-12 pb-6 lg:pb-16'>
       <div className='h-full relative overflow-x-hidden'>
 
         {/* carousel arrows */}

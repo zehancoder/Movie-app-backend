@@ -47,18 +47,18 @@ function MovieCard({ desc, title, posterPath, rating, vote, mediaType, genre, sa
 
                 </div>
                 <div className=" overflow-hidden transition  duration-300 relative">
-                    <img className="w-full  h-full object-cover rounded-lg" src={'https://image.tmdb.org/t/p/w500' + posterPath} alt="" />
+                    <img loading="lazy" className="w-full  h-full object-cover rounded-lg" src={'https://image.tmdb.org/t/p/w500' + posterPath} alt="" />
                     <div className="h-full w-full detailDiv z-30  absolute top-0 left-0 transition duration-300">
                         <div to={''} className=" transition duration-300  z-20 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] rounded-full">
                             <div className="flex cursor-pointer items-center gap-2 px-2 py-2  transition-all duration-300 border  rounded-full bg-[#fff]">
                                 <FaPlay className="text-[#3d4afe] text-[13px] " />
-                                <p className="font-medium text-[14px] text-gray-900">Play Now</p>
+                                <p className="font-medium text-[12px] md:text-[13px] lg:text-[14px] text-gray-900">Play Now</p>
                             </div>
                             <div className="flex items-center gap-2 text-white text-xl mt-3 justify-evenly">
-                                <div className={`${like ? 'bg-[#3d4afe]' : 'bg-transparent'} cursor-pointer px-1.5 border border-gray-700 rounded-md py-1`}>
+                                <div className={`${like ? 'bg-[#3d4afe]' : 'bg-transparent'} cursor-pointer px-1.5 border border-gray-400 rounded-md py-1`}>
                                     <AiOutlineLike />
                                 </div>
-                                <div className={`${save ? 'bg-[#3d4afe]' : 'bg-transparent'} cursor-pointer px-1.5 border border-gray-700 rounded-md py-1`}>
+                                <div className={`${save ? 'bg-[#3d4afe]' : 'bg-transparent'} cursor-pointer px-1.5 border border-gray-400 rounded-md py-1`}>
                                     {save ? <IoBookmarkSharp /> : <LiaBookmarkSolid />}
                                 </div>
                             </div>
@@ -68,10 +68,10 @@ function MovieCard({ desc, title, posterPath, rating, vote, mediaType, genre, sa
             </div>
             <div className="mt-3">
                 <p className="text-white font-medium text-[17px] leading-5">{title}</p>
-                <div className="flex items-center flex-wrap text-[15px] mt-1 gap-2 font-normal text-[#525cdbcc]">
+                <div className="flex items-center flex-wrap text-[15px] mt-1  font-normal text-[#525cdbcc]">
                     {
                         mainGenre.map((gen, id) => {
-                            return <div className="flex " key={id}><p className="">{gen.name} |</p></div>
+                            return <div className="flex mr-0.5" key={id}> <p className="">{gen.name} | </p> </div>
                         })
                     }
                 </div>

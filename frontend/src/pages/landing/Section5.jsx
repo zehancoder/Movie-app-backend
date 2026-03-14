@@ -6,8 +6,8 @@ import Skeleton from 'react-loading-skeleton';
 import CardSkeleton from '../../components/CardSkeleton';
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { MdOutlineNavigateBefore } from 'react-icons/md';
-function Section2() {
-    const [pageNumber, setPageNumber] = useState(1);
+function Section5() {
+    const [pageNumber, setPageNumber] = useState(2);
     const [loading, setLoading] = useState(false);
     const [movies, setMovies] = useState([])
     // fetching top rated movies
@@ -18,7 +18,7 @@ function Section2() {
     }
     useEffect(() => {
         setLoading(true)
-        fetchData('top_rated', pageNumber)
+        fetchData('upcoming', pageNumber)
     }, []);
 
     // handling carousel functionality
@@ -59,10 +59,10 @@ function Section2() {
         }
     }
     return (
-        <div className='md:pb-12 pb-6 lg:pb-16 overflow-x-hidden pt-6'>
+        <div className='md:pb-12 pb-6 lg:pb-16 overflow-x-hidden'>
             <div>
                 <div className='flex items-center justify-between w-full'>
-                    <h1 className='text-3xl font-bold text-white flex items-center gap-2'><FaPlay className='text-[18px] text-[#f651fb]' /> Top Rated</h1>
+                    <h1 className='text-3xl font-bold text-white flex items-center gap-2'><FaPlay className='text-[18px] text-[#3d4afe]' />Upcoming</h1>
                     <div className='flex items-center text-white text-2xl gap-2'>
                         <div onClick={() => translateToLeft()} className="px-1.5 lg:px-2 border border-[#1F1F1F] py-1.5 lg:py-2 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
                         >
@@ -92,4 +92,4 @@ function Section2() {
     )
 }
 
-export default Section2
+export default Section5;
