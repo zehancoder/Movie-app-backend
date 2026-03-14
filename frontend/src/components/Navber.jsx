@@ -6,9 +6,20 @@ import { IoDiamond } from "react-icons/io5";
 import { IoMdContact } from "react-icons/io";
 import { RiUserSharedLine } from "react-icons/ri";
 import { Link } from 'react-router';
+import { useSelector } from 'react-redux';
 
 function Navber() {
+    const currentUser = useSelector(state => state.loginUser);
+    const [userExist, setUserExist] = useState(false)
+    console.log(currentUser);
     
+    useEffect(() => {
+        if (currentUser.message === "Success") {
+            setUserExist(true);
+            return;
+        }
+    }, [currentUser]);
+    console.log(currentUser);
     
     return (
         <div id='navber' className={`bg-black px-2 md:px-4  py-7 fixed z-40 w-[80%] `}>
@@ -16,10 +27,12 @@ function Navber() {
                 <div className='flex w-[95%] md:w-[85%] lg:w-[70%] justify-between text-[15px] md:text-[17px] font-medium bg-[#303030] items-center gap-2 px-2 md:px-4 py-0.5 md:py-1.5 rounded-full'><input className='px-2 py-1 outline-none w-[85%]' type="text" placeholder='Search Your Videos' /><IoSearch className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div>
                 <div className='flex items-center gap-3 justify-between'>
                     {/* <div className='linear-bg navber-hover-effect'><IoIosNotifications className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div> */}
-                    <Link to={'/register'} className='navber-hover-effect linear-bg'>Sign Up <RiUserSharedLine className=' cursor-pointer font-semibold text-xl px-0.5 py-0.5' /></Link>
+                    {userExist ? <div className='linear-bg navber-hover-effect'><IoIosNotifications className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div> : <Link to={'/register'} className='navber-hover-effect linear-bg'>Sign Up <RiUserSharedLine className=' cursor-pointer font-semibold text-xl px-0.5 py-0.5' /></Link>}
                     <div className='navber-hover-effect linear-bg'>Subscribe <IoDiamond className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div>
-                    <Link to={'/login'} className='navber-hover-effect linear-bg linear-bg-noHover'>Login <IoMdContact className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></Link>
-                    
+                    {
+                        userExist ? <Link to={currentUser.data.role === 'admin' ? '/admin' :'/profile'} className='navber-hover-effect linear-bg linear-bg-noHover'>{currentUser.data?.role === 'admin' ? "Admin" : "Profile"}<IoMdContact className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></Link> : <Link to={'/login'} className='navber-hover-effect linear-bg linear-bg-noHover'>Login <IoMdContact className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></Link>
+                    }
+
                 </div>
             </div>
         </div>

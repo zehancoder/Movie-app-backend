@@ -1,17 +1,46 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import 'react-loading-skeleton/dist/skeleton.css'
 import { IoPlay } from 'react-icons/io5';
 import { FaPlus } from 'react-icons/fa';
 import { AiFillLike, AiFillSound } from "react-icons/ai";
 import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
+import { getMe } from '../../features/apiLayers/auth.api';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginErrMsg, loginUserSuccess } from '../../toolkit/slice';
 
 function Section1() {
+  const currentUser = useSelector(state => state.loginUser);
+
+  // auto detect login functionality
+  // const currentUser = useSelector(state => state.loginUser);
+  //   const getCurrentLogin = async () => {
+  //     const response = await getMe();
+  //     if (!response.success) {
+  //       dispatch(loginErrMsg(response.message));
+  //       return;
+  //     }
+  //     dispatch(loginErrMsg('Success'));
+  //     dispatch(loginUserSuccess(response.data.user));
+  //   }
+  //   // current login user detect autometically
+  //   useEffect(() => {
+  //     getCurrentLogin();
+  //   }, []);
+  //   useEffect(() => {
+  //     if (currentUser?.message !== 'Success') {
+  //       navigate('/login');
+  //       return;
+  //     }
+  //     navigate('/')
+  //   }, [currentUser])
+  // console.log(currentUser.data);
+
+  // home page movies
   const [movies, setMovies] = useState([]);
-  const [carouselMovie, setCarouselMovie] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   // fetching data for showing i-n home page carousel 
   useEffect(() => {
     if (movies.length === 0) {
@@ -89,8 +118,9 @@ function Section1() {
   // finish carousel functionality
 
 
+
   return (
-    <div className='px-5 py-3 mt-5 h-full'>
+    currentUser.message && <div className='px-5 py-3 mt-5 h-full'>
       <div className='h-full relative overflow-x-hidden'>
 
         {/* carousel arrows */}

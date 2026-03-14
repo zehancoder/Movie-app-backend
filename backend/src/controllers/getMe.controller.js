@@ -12,7 +12,7 @@ const getMeController = async (req, res) => {
             email: user.email,
             username: user.username,
             id: user._id,
-            rele: user.role
+            role: user.role
         }
     });
 }

@@ -10,7 +10,12 @@ function Login() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const user = useSelector(state => state.loginUser)
+    const user = useSelector(state => state.loginUser);
+    useEffect(() => {        
+        if(user.message === 'Success'){
+            navigate('/')
+        }
+    }, [user])
     const loginUserFunc = async () => {
         dispatch(loginUserState())
         try {
@@ -21,16 +26,11 @@ function Login() {
             }
             dispatch(loginUserSuccess(response?.data.isUserNotExist));
             dispatch(loginErrMsg('success'));
-
             navigate('/')
         } catch (error) {
             console.log(error);
         }
-
-
-    }
-    console.log(user);
-    
+    }    
     const loading = useSelector(state => state.loading)
     if (loading) {
         return <main>
@@ -45,7 +45,7 @@ function Login() {
                         <div class="border mx-auto border-slate-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-lg:mx-auto">
                             <form class="space-y-6" >
                                 <div class="mb-12">
-                                    <h1 class="text-slate-900 text-3xl font-semibold">Sign   in</h1>
+                                    <h1 class="text-slate-900 text-3xl font-semibold">Login</h1>
                                     <p class="text-slate-600 text-[15px] mt-6 leading-relaxed">Sign in to your account and explore a world of possibilities. Your journey begins here.</p>
                                 </div>
 

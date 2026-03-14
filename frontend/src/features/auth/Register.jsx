@@ -29,16 +29,19 @@ function Register() {
         return
       }
       dispatch(registerUserSuccess(response?.data?.newUser));
-      dispatch(registerErrMsg('success'))
+      dispatch(registerErrMsg('Success'))
     } catch (error) {
       return error.response.data.message
     }
 
   }
-  console.log(registerData);
-  
+  if (registerData.message === 'Success') {
+    navigate('/')
+  }
+
+
   const loading = useSelector(state => state.loading)
-  if(loading){
+  if (loading) {
     return <main>
       <h1 className='text-4xl font-medium mt-20 ml-20'>Loading...</h1>
     </main>

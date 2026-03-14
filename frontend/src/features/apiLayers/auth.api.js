@@ -27,7 +27,7 @@ export async function login(email, password) {
         return {
             success: true,
             data: response.data,
-            message: 'success'
+            message: 'Success'
         };
 
     } catch (error) {
@@ -43,11 +43,16 @@ export async function login(email, password) {
 export async function getMe() {
 
     try {
-        const response = await api.post('/get-me', { username: username, email, password }).catch()
-        return response.data;
+        const response = await api.get('/get-me')
+        return {
+            success: true, 
+            data: response.data,
+            message: "Success"
+        }
     } catch (error) {
-        console.log(error);
-
-
+        return {
+            success: false,
+            message: error.response?.data?.message
+        }
     }
 }
