@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getCurrentLogin } from './features/getCurrentLogin/user.find'
 import { loginErrMsg, loginUserSuccess } from './toolkit/slice'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -37,10 +39,10 @@ function App() {
       <div id="stars2"></div>
       <div id="stars3"></div> */}
       <div className='z-50 flex h-full  w-full'>
-        <div className=' lg:w-[33%] lg:static absolute left-0 top-0 xl:w-[20%] h-full px-8 py-9 bg-[#1B1B1B]'>
+        <div className=' lg:w-[22%] lg:static transform lg:translate-0 -translate-x-full absolute left-0 top-0 xl:w-[20%] h-full px-8 py-9 bg-[#1B1B1B]'>
           <Leftmenu />
         </div>
-        <div className='w-full h-full scroll-smooth overflow-scroll overflow-x-hidden px-5'>
+        <div className='w-full h-full scroll-smooth overflow-scroll overflow-x-hidden '>
           <Navber />
           <div className='h-24'>
             <button onClick={() => dispatch()}></button>

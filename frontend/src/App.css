@@ -46,11 +46,22 @@ body {
 .navber-hover-effect {
   @apply flex items-center gap-2 px-3 text-[14px] font-medium md:text-[15px] rounded-full border border-[#b5b5b54b] hover:border-none cursor-pointer py-1.5
 }
+
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
 }
+
+.detailDiv {
+  background: linear-gradient(90deg, #0048ffa1 0%, #fe52fba1 100%);
+  transform: translateY(100%);
+}
+
+.movieDetail:hover .detailDiv {
+  transform: translateY(0%);
+}
+
 /* hover effects
 .customBtnHoverEffect {
   position: relative;
@@ -95,4 +106,8 @@ body {
 
 .carouselArrowEffect:hover::before {
   height: 100%;
-} */ 
+} */
+
+#main_page::-webkit-scrollbar {
+  display: none;
+}

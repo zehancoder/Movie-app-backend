@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { Link, useNavigate } from 'react-router';
 import 'react-loading-skeleton/dist/skeleton.css'
 import { IoPlay } from 'react-icons/io5';
-import { FaPlus } from 'react-icons/fa';
+import { FaLess, FaPlus } from 'react-icons/fa';
 import { AiFillLike, AiFillSound } from "react-icons/ai";
 import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
 import { getMe } from '../../features/apiLayers/auth.api';
@@ -13,42 +13,17 @@ import { loginErrMsg, loginUserSuccess } from '../../toolkit/slice';
 
 function Section1() {
   const currentUser = useSelector(state => state.loginUser);
-
-  // auto detect login functionality
-  // const currentUser = useSelector(state => state.loginUser);
-  //   const getCurrentLogin = async () => {
-  //     const response = await getMe();
-  //     if (!response.success) {
-  //       dispatch(loginErrMsg(response.message));
-  //       return;
-  //     }
-  //     dispatch(loginErrMsg('Success'));
-  //     dispatch(loginUserSuccess(response.data.user));
-  //   }
-  //   // current login user detect autometically
-  //   useEffect(() => {
-  //     getCurrentLogin();
-  //   }, []);
-  //   useEffect(() => {
-  //     if (currentUser?.message !== 'Success') {
-  //       navigate('/login');
-  //       return;
-  //     }
-  //     navigate('/')
-  //   }, [currentUser])
-  // console.log(currentUser.data);
-
   // home page movies
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   // fetching data for showing i-n home page carousel 
   useEffect(() => {
+    setLoading(true)
     if (movies.length === 0) {
       fetch('https://api.themoviedb.org/3/discover/movie?api_key=1a05bd3a661c3ad18b28dfdde27416e8&with_genres=27&page=1').then((res) => res.json()).then(data => setMovies(data.results)).finally(() => {
-        setLoading(true)
       })
     }
-
+    setLoading(false)
 
   }, []);
 
@@ -120,14 +95,14 @@ function Section1() {
 
 
   return (
-    currentUser.message && <div className='px-5 py-3 mt-5 h-full'>
+    currentUser.message && <div className='px-3 md:px-5 py-2 md:py-3 mt-5 h-[80%] pb-16'>
       <div className='h-full relative overflow-x-hidden'>
 
         {/* carousel arrows */}
-        <div className="text-gray-400 absolute -bottom-0 md:bottom-0 flex items-center justify-between px-12 py-5 z-20 w-full md:h-[70px] h-14 lg:h-32 text-xl font-bold">
+        <div className="text-gray-400 absolute -bottom-0 md:bottom-0 flex items-center justify-between px-4 md:px-12 py-3 md:py-5 z-20 w-full md:h-[70px] h-14 lg:h-32 text-xl font-bold">
           <div
             onClick={carouselDown}
-            className="px-3 lg:px-4 border border-[#1F1F1F] py-2 lg:py-4 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
+            className="px-2 lg:px-3 border border-[#1F1F1F] py-2 lg:py-3 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
           >
             <LuMoveLeft className="" />
           </div>
@@ -149,7 +124,7 @@ function Section1() {
 
           <div
             onClick={carouselUp}
-            className="px-3 lg:px-4 border border-[#1F1F1F] py-2 lg:py-4 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
+            className="px-2 lg:px-3 border border-[#1F1F1F] py-2 lg:py-3 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
           >
             <LuMoveRight className="" />
           </div>
@@ -161,7 +136,7 @@ function Section1() {
           transform: `translateX(-${carouselTranslate}%)`,
         }}>
           {
-            loading ? movies.map(
+            !loading ? movies.map(
               ({ backdrop_path, overview, original_title, id }, idx) => {
                 if (idx < 8) {
                   return <div
@@ -192,16 +167,17 @@ function Section1() {
                           </button>
                           <div className="flex items-center gap-2 text-[18px] ml-2 text-gray-400">
                             <span
-                              className="px-3 lg:px-4 border border-[#1F1F1F] py-2 lg:py-4 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
+                              className="px-2 lg:px-3 border border-[#1F1F1F] py-2 lg:py-3 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
                             >
                               <FaPlus />
                             </span>{" "}
                             <span
-                              className="px-3 lg:px-4 border border-[#1F1F1F] py-2 lg:py-4 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
+                              className="px-2 lg:px-3 border border-[#1F1F1F] py-2 lg:py-3 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
                             >
                               <AiFillLike />
                             </span>
-                            <span className="px-3 lg:px-4 border border-[#1F1F1F] py-2 lg:py-4 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg">
+                            <span className="px-2 lg:px-3 border border-[#1F1F1F] py-2 lg:py-3 hover:text-white bg-[#0F0F0F] rounded-lg cursor-pointer linear-bg"
+                            >
                               <AiFillSound />
                             </span>
                           </div>
@@ -219,9 +195,6 @@ function Section1() {
 
 
         </div>
-      </div>
-      <div className='h-screen'>
-
       </div>
     </div>
   )
