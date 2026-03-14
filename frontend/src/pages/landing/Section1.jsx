@@ -10,13 +10,16 @@ import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
 
 function Section1() {
   const [movies, setMovies] = useState([]);
-  const [carouselMovie, setCarouselMovie] = useState([])
+  const [carouselMovie, setCarouselMovie] = useState([]);
+  const [loading, setLoading] = useState(false)
   // fetching data for showing i-n home page carousel 
   useEffect(() => {
     if (movies.length === 0) {
-      fetch('https://api.themoviedb.org/3/discover/movie?api_key=1a05bd3a661c3ad18b28dfdde27416e8&with_genres=27&page=1').then((res) => res.json()).then(data => setMovies(data.results));
+      fetch('https://api.themoviedb.org/3/discover/movie?api_key=1a05bd3a661c3ad18b28dfdde27416e8&with_genres=27&page=1').then((res) => res.json()).then(data => setMovies(data.results)).finally(() => {
+        setLoading(true)
+      })
     }
-    console.log(movies);
+
 
   }, []);
 
@@ -100,55 +103,18 @@ function Section1() {
           </div>
 
           <div className="flex items-center gap-1">
-            <div
-              className={`   ${carouselNum == 0
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-            <div
-              className={`   ${carouselNum == 1
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-            <div
-              className={`   ${carouselNum == 2
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-            <div
-              className={`  ${carouselNum == 3
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-
-            <div
-              className={`   ${carouselNum == 4
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-            <div
-              className={`   ${carouselNum == 5
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-            <div
-              className={`   ${carouselNum == 6
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
-            <div
-              className={`  ${carouselNum == 7
-                ? "bg-[#ff0000] h-1 md:h-1.5 w-4 md:w-5"
-                : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
-                }`}
-            ></div>
+            {
+              movies.map((_, idx) => {
+                if (idx < 8) {
+                  return <div
+                    className={`   ${carouselNum == idx
+                      ? "bg-[#3d4afe] h-1 md:h-1.5 w-4 md:w-5"
+                      : "bg-[#333333] h-0.5 md:h-1 w-3 md:w-4"
+                      }`}
+                  ></div>
+                }
+              })
+            }
           </div>
 
           <div
@@ -165,7 +131,7 @@ function Section1() {
           transform: `translateX(-${carouselTranslate}%)`,
         }}>
           {
-            movies.length > 0 ? movies.map(
+            loading ? movies.map(
               ({ backdrop_path, overview, original_title, id }, idx) => {
                 if (idx < 8) {
                   return <div

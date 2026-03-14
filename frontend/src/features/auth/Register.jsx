@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import axios from 'axios'
+import { register } from '../apiLayers/auth.api';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerErrMsg, registerUserState, registerUserSuccess } from '../../toolkit/slice';
 function Register() {
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const registerFunc = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const registerData = useSelector(state => state.registerUser);
+  const registerFunc = async () => {
 
     if (name === '' && email === '' && password === '') {
       alert('please fills all inputs')
@@ -16,15 +21,27 @@ function Register() {
       alert('Password minimum 8 charcter')
       return;
     }
-    console.log(username, email, password);
-
-    // axios.post('http://localhost:3000/register', { username: username, email, password })
+    dispatch(registerUserState())
     try {
-      axios.post('http://localhost:3000/register', { username: username, email, password }, {withCredentials: true}).then((res) => res.data)
+      const response = await register(username, email, password);
+      if (!response?.success) {
+        dispatch(registerErrMsg(response?.message));
+        return
+      }
+      dispatch(registerUserSuccess(response?.data?.newUser));
+      dispatch(registerErrMsg('success'))
     } catch (error) {
-      console.log(error.message);
-
+      return error.response.data.message
     }
+
+  }
+  console.log(registerData);
+  
+  const loading = useSelector(state => state.loading)
+  if(loading){
+    return <main>
+      <h1 className='text-4xl font-medium mt-20 ml-20'>Loading...</h1>
+    </main>
   }
 
   return (
@@ -61,7 +78,7 @@ function Register() {
           <Link to={'/login'} class="text-sm text-slate-600 mt-6">Already have an account? <a href="javascript:void(0);" class="text-blue-600 font-semibold hover:underline ml-1">Login here</a></Link>
         </form>
 
-       
+
       </div>
     </div>
   )

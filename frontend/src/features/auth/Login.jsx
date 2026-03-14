@@ -1,17 +1,41 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { Link, } from 'react-router'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, } from 'react-router'
+import { loginErrMsg, loginUserState, loginUserSuccess } from '../../toolkit/slice';
+import { login } from '../apiLayers/auth.api';
 
 function Login() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const user = useSelector(state => state.loginUser)
+    const loginUserFunc = async () => {
+        dispatch(loginUserState())
+        try {
+            const response = await login(email, password);
+            if (!response?.success) {
+                dispatch(loginErrMsg(response?.message));
+                return;
+            }
+            dispatch(loginUserSuccess(response?.data.isUserNotExist));
+            dispatch(loginErrMsg('success'));
 
-    const loginUserFunc = () => {
-        if (email === '' && password === '') {
-            return;
+            navigate('/')
+        } catch (error) {
+            console.log(error);
         }
-        axios.post('http://localhost:3000/login', { email, password }, { withCredentials: true }).then((res) => console.log(res.data)).catch((error) => alert(error.response.data.message))
 
+
+    }
+    console.log(user);
+    
+    const loading = useSelector(state => state.loading)
+    if (loading) {
+        return <main>
+            <h1>Loading...</h1>
+        </main>
     }
     return (
         <div>

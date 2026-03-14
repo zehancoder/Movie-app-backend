@@ -3,9 +3,10 @@ import Login from './features/auth/Login'
 import Routing from './routes/Route'
 import Navber from './components/Navber'
 import Leftmenu from './components/Leftmenu'
-
+import { useDispatch, useSelector } from 'react-redux'
 function App() {
-
+  const dispatch = useDispatch();
+  const counter = useSelector(state => state.counter)
   return (
     <div class=" w-full h-screen overflow-hidden font-montserrat ">
       {/* <div id="stars"></div>
@@ -18,7 +19,7 @@ function App() {
         <div  className='w-full h-full scroll-smooth overflow-scroll overflow-x-hidden px-5'>
           <Navber />
           <div className='h-24'>
-
+            <button onClick={() => dispatch()}></button>
           </div>
           <Routing />
         </div>

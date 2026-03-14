@@ -9,6 +9,8 @@ const getUserRouter = require('./routes/getUser.route');
 const getMovieRouter = require('./routes/getMovies.route');
 const updateMovieRouter = require('./routes/updateMovie.route');
 const movieDeleteRouter = require('./routes/movieDelete.route');
+const getMeRouter = require('./routes/getme.route');
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -22,6 +24,7 @@ app.use('/', movieRouter);
 app.use('/', getUserRouter);
 app.use('/', getMovieRouter);
 app.use('/', updateMovieRouter);
-app.use('/', movieDeleteRouter)
+app.use('/', movieDeleteRouter);
+app.use('/', getMeRouter)
 connectToDB()
 module.exports = app;
