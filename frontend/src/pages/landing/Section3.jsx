@@ -81,7 +81,7 @@ function Section3() {
                                 <MovieCard genre={movie.genre_ids} title={movie.title} posterPath={movie.poster_path} rating={movie.vote_average.toFixed(1)} />
                             </div>
                         }) : Array(6).fill(null).map(() => {
-                            return <div className='h-[380px] mt-8'>
+                            return <div className='h-full w-full mt-8'>
                                 <CardSkeleton />
                             </div>
                         })

@@ -11,8 +11,8 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const user = useSelector(state => state.loginUser);
-    useEffect(() => {        
-        if(user.message === 'Success'){
+    useEffect(() => {
+        if (user.message === 'Success') {
             navigate('/')
         }
     }, [user])
@@ -26,11 +26,13 @@ function Login() {
             }
             dispatch(loginUserSuccess(response?.data.isUserNotExist));
             dispatch(loginErrMsg('success'));
-            navigate('/')
+            window.location.reload()
+
         } catch (error) {
             console.log(error);
         }
-    }    
+    }
+    console.log(user.message)
     const loading = useSelector(state => state.loading)
     if (loading) {
         return <main>

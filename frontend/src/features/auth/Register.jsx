@@ -29,7 +29,8 @@ function Register() {
         return
       }
       dispatch(registerUserSuccess(response?.data?.newUser));
-      dispatch(registerErrMsg('Success'))
+      dispatch(registerErrMsg('Success'));
+      window.location.reload()
     } catch (error) {
       return error.response.data.message
     }

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <footer class="tracking-wide bg-gradient-to-br from-[#000513] via-[#000f35] to-[#410b40] px-8 sm:px-12 pt-16 pb-8">
+        <footer class="tracking-wide bg-gradient-to-br from-[#000513] via-[#022274a9] to-[#7a0178a4] px-8 sm:px-12 pt-16 pb-8">
             <div class="grid min-[1200px]:grid-cols-3 gap-12 xl:gap-16">
                 <div class="min-[1200px]:max-w-sm max-w-lg w-full">
                     <a href='javascript:void(0)'>

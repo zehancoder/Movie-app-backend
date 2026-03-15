@@ -7,14 +7,25 @@ import { IoFlag } from "react-icons/io5";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { LiaBloggerB } from "react-icons/lia";
 import { MdPermContactCalendar } from "react-icons/md";
+import { useSelector } from 'react-redux';
 
 function Leftmenu() {
+    const user = useSelector(state => state.loginUser.data);
+
     return (
         <div className='w-full'>
-            <div>
-                <img className='w-[140px]' src="https://ticstube-html.temptics.com/assets/img/logo-white.svg" alt="" />
+            <div className='w-[180px]'>
+                <img className='w-full h-full' src="/Logo.png" alt="" />
             </div>
             <div className='mt-12'>
+                <div className={`${user.role === 'admin' ? "block" : "hidden"} nav-links px-4 mt-3 cursor-pointer border border-[#36415388] bg-black text-[17px] rounded-lg flex items-center justify-between py-[9px] w-full`
+                }>
+                    <div className='flex items-center gap-3 '>
+                        <IoMdContact className=' cursor-pointer font-semibold text-[#808080] link-icons  text-2xl px-0.5 py-0.5' />
+                        <span className='text-[17px] font-medium text-[#DEF7FF]'>Admin</span>
+                    </div>
+                    <IoIosArrowForward className='text-[#DEF7FF] text-[17px]' />
+                </div>
                 <NavLink to={'/'} className={({ isActive }) =>
                     `${isActive ? "linear-bg-noHover" : "nav-links"} px-4 mt-3 cursor-pointer border border-[#36415388] bg-black text-[17px] rounded-lg flex items-center justify-between py-[9px] w-full`
                 }>
