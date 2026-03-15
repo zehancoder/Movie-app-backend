@@ -23,11 +23,20 @@ function CreateMovie() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/create/movie', { title, img_url, trailer_youtube_link, description, release_date, genre, category }, { withCredentials: true }).then((res) => console.log(res.data)).catch((error) => alert(error.response.data.message))
+        axios.post('http://localhost:3000/create/movie', { title, img_url, trailer_youtube_link, description, release_date, genre, category }, { withCredentials: true }).then((res) => console.log(res.data)).catch((error) => alert(error.response.data.message));
+        setFormData({
+            title: '',
+            img_url: '',
+            trailer_youtube_link: '',
+            description: '',
+            release_date: '',
+            genre: '',
+            category: ''
+        })
     }
     return (
-        <div className='h-full flex items-center justify-center'>
-            <div className="w-[95%] sm:max-w-2xl mx-auto md:mt-8 mt-6 lg:mt-10 md:p-6 p-4 lg:p-8 bg-[#BFC9D1] shadow-lg rounded-lg border border-gray-200">
+        <div className='h-screen flex items-center justify-center '>
+            <div className="w-[95%] sm:max-w-2xl mx-auto md:mt-8 mt-6 lg:mt-10 md:p-6 p-4 lg:p-8 bg-[#cecece8a] shadow-lg rounded-lg border border-gray-200">
                 <h2 className=" md:text-xl text-lg lg:text-2xl font-bold md:mb-4 mb-2 lg:mb-6 text-gray-800 text-center">Add New Movie</h2>
 
                 {message && (

@@ -33,14 +33,17 @@ function App() {
       return;
     }
     navigate('/')
-  }, [currentUser])
+  }, [currentUser]);
+  //left menu toggling state
+  const toggleMenu = useSelector(state => state.toggleLeftMenu)
+
   return (
     <div class="w-full h-screen overflow-hidden font-montserrat ">
       {/* <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div> */}
-      <div className='z-50 flex h-full  w-full'>
-        <div className=' lg:w-[22%] lg:static transform lg:translate-0 -translate-x-full absolute left-0 top-0 xl:w-[18%] h-full px-8 py-9 bg-[#1B1B1B]'>
+      <div className=' flex h-full  w-full'>
+        <div className={` lg:w-[22%] lg:static z-50 transform ${toggleMenu ? '-translate-x-full' : 'translate-x-0'} absolute left-0 top-0 xl:w-[18%] h-full px-4 md:px-8 py-5 md:py-9 bg-[#1B1B1B]`}>
           <Leftmenu />
         </div>
         <div className='w-full h-full scroll-smooth overflow-scroll overflow-x-hidden'>

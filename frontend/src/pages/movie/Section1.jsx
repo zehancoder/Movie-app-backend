@@ -31,7 +31,6 @@ function Section1() {
   const [page, setPage] = useState(1);
 
   const fetchMovies = async (genre, pageNum, append = false) => {
-    setLoading(true);
     const response = await fetchWithGenre(genre, pageNum);
 
     setMovies(prev =>
@@ -42,11 +41,14 @@ function Section1() {
   };
 
   useEffect(() => {
+    setMovies([])
+    setLoading(true)
     setPage(1);
     fetchMovies(selectedGenre, 1);
   }, [selectedGenre]);
 
   const updatePageFunc = () => {
+    setLoading(true);
     const nextPage = page + 1;
     setPage(nextPage);
     fetchMovies(selectedGenre, nextPage, true);

@@ -36,7 +36,7 @@ function MovieCard({ desc, title, posterPath, rating, vote, mediaType, genre, sa
         });
         setMainGenre(finds);
 
-    }, [])
+    }, [genre])
 
     return (
         <div className="">

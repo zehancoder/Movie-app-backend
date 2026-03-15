@@ -15,12 +15,18 @@ body {
   width: 100vw;
   overflow-x: hidden;
 }
-
+*::-webkit-scrollbar{
+  display: none;
+}
 @theme {
   --font-montserrat: font-family: "Montserrat", sans-serif;
 }
-
-
+*{
+  font-family: "Montserrat", sans-serif;
+}
+.linear-bg{
+  transition: 0.5s;
+}
 .linear-bg:hover {
   background: linear-gradient(90deg, #0048FF 0%, #FE52FB 100%);
 }

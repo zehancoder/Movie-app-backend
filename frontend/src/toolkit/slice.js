@@ -5,13 +5,19 @@ const initialState = {
     counter: 0,
     loginUser: { message: '', data: {} },
     registerUser: { message: '', data: {} },
-    loading: false
+    loading: false,
+    users: {
+        success: false,
+        data: []
+    },
+    toggleLeftMenu: false,
 }
 
 export const reduxSlice = createSlice({
     name: 'movie website',
     initialState,
     reducers: {
+        // login user data and register user data handling
         loginUserState: (state, action) => {
             state.loading = true;
         },
@@ -33,9 +39,20 @@ export const reduxSlice = createSlice({
         registerErrMsg: (state, action) => {
             state.loading = false;
             state.registerUser.message = action.payload
+        },
+        // handle users apis
+        usersStoreState: (state, action) => {
+            state.users.data = action.payload;
+        },
+        userstoreDataErr: (state, action)=> {
+            state.users.success = action.payload;
+        },
+        // toggle left menu state
+        leftMenuHandleState: (state, action) => {
+            state.toggleLeftMenu = !state.toggleLeftMenu;
         }
     }
 });
 
-export const { loginUserState, loginUserSuccess, loginErrMsg, registerErrMsg, registerUserState, registerUserSuccess } = reduxSlice.actions;
+export const { loginUserState, loginUserSuccess, loginErrMsg, registerErrMsg, registerUserState, registerUserSuccess, usersStoreState, userstoreDataErr, leftMenuHandleState } = reduxSlice.actions;
 export default reduxSlice.reducer;
