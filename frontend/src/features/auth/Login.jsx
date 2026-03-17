@@ -36,7 +36,6 @@ function Login() {
             console.log(error);
         }
     }
-    console.log(user.message)
     const loading = useSelector(state => state.loading)
     if (loading) {
         return <main>

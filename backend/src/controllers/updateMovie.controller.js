@@ -17,7 +17,7 @@ const updateMovieController = async (req, res) => {
     const { title, img_url, description, release_date, genre, category, trailer_youtube_link } = req.body;
     const updatedMovie = await movieModel.findByIdAndUpdate(movieId, { title, img_url, description, release_date, genre, category, trailer_youtube_link });
     res.status(200).json({
-        message: "update success on",
+        message: "Successfully Updated",
         updatedMovie
     });
 }

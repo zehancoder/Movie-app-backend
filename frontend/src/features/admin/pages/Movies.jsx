@@ -8,9 +8,10 @@ import {
 } from "../../../toolkit/slice";
 import MovieCard from "../../../components/MovieCard";
 import { data, Link } from "react-router";
-import { FaPlay } from "react-icons/fa";
+import { FaEdit, FaPlay } from "react-icons/fa";
 import { TbDots } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
+import UpdateForm from "./UpdateForm";
 
 function Movies() {
   const dispatch = useDispatch();
@@ -23,48 +24,107 @@ function Movies() {
   const getMoviesFunc = async () => {
     const response = await movieApi();
     if (!response.success) {
-      dispatch(adminMoviesStateMessage("Cannot get moves"));
+      dispatch(adminMoviesStateMessage("Cannot get movies"));
       return;
     }
-    console.log(response);
     dispatch(adminMoviesState(response.data.movies));
     setLoading(false);
-    return response.data.movies
+    return response.data.movies;
   };
   useEffect(() => {
     setLoading(true);
     getMoviesFunc();
   }, []);
-  console.log(adminMovies.data[1]?.trailer_youtube_link.split("=")[1]);
   // movie delete functinaltiy
 
   const deleteMovieFunc = async (moveId) => {
     const response = await deleteMovie(moveId);
+
     if (!response.success) {
       dispatch(errorMsgState(response.message));
       return;
     }
-   
-    
-    dispatch(errorMsgState("Successfuly Delete"));
+
+    const updatedMovies = adminMovies.data.filter(
+      (movie) => movie._id !== moveId,
+    );
+
+    dispatch(adminMoviesState(updatedMovies));
+    dispatch(errorMsgState("Successfully Deleted"));
   };
   useEffect(() => {
     setMovies(adminMovies.data);
   }, [adminMovies]);
 
+  // update movies..
+  const [updateMovieId, setUpdateMovieId] = useState({
+    movieId : '',
+    title : '',
+    poster_path : '',
+    trailer_youtube_link : '',
+    description: '',
+    release_date: '',
+    genre: '',
+    category: '',
+    vote_average: '',
+  });
+  const updateMovies = (
+    movieId,
+    title,
+    poster_path,
+    trailer_youtube_link,
+    description,
+    release_date,
+    genre,
+    category,
+    vote_average,
+  ) => {
+    setUpdateMovieId({
+      movieId,
+      title,
+      poster_path,
+      trailer_youtube_link,
+      description,
+      release_date,
+      genre,
+      category,
+      vote_average,
+    });
+  };
+
   return (
-    <div className=" min-h-screen px-5 py-8">
+    <div className=" min-h-screen px-5 py-8 relative">
       <h1 className="text-3xl font-medium text-white">New Movies</h1>
       {movies.length > 0 ? (
         <div className="grid grid-cols-6 items-center gap-3">
           {movies.map((movie, idx) => {
             return (
               <div className=" transition ease border border-gray-800 duration-500  px-2 py-1">
-                <div
-                  onClick={() => deleteMovieFunc(movie._id)}
-                  className="text-xl relative flex items-center justify-end cursor-pointer font-bold text-white px-3 py-2 text-end w-full"
-                >
-                  <MdDelete className="" />
+                <div className="text-[18px] relative flex items-center gap-3 justify-end cursor-pointer font-bold text-gray-400 px-3 py-2 text-end w-full">
+                  <div
+                    className="hover:text-[#fe52fba1] transition duration-300"
+                    onClick={() => deleteMovieFunc(movie._id)}
+                  >
+                    <MdDelete className="" />
+                  </div>
+                  <div
+                    className="hover:text-[#fe52fba1] transition duration-300"
+                    onClick={() =>
+                      updateMovies(
+                        movie._id,
+                        movie.title,
+                        movie.poster_path,
+                        movie.trailer_youtube_link,
+                        movie.description,
+                        movie.release_date,
+                        movie.genre,
+                        movie.category,
+                        movie.vote_average,
+                      )
+                    }
+                  >
+                    <FaEdit className="" />
+                  </div>
                 </div>
                 <div className="">
                   <div className=" relative overflow-hidden movieDetail">
@@ -86,7 +146,7 @@ function Movies() {
                           className=" transition duration-300  z-20 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] rounded-full"
                         >
                           <Link
-                            to={`/movies/vedio/${adminMovies.data[1]?.trailer_youtube_link.split("=")[1]}`}
+                            to={`/movies/vedio/${adminMovies?.data[1]?.trailer_youtube_link.split("=")[1]}`}
                             className="flex w-[120px] cursor-pointer items-center gap-2 px-2 py-2.5  transition-all duration-300 border  rounded-full bg-[#fff]"
                           >
                             <FaPlay className="text-[#3d4afe] text-[13px] " />
@@ -125,6 +185,11 @@ function Movies() {
         <h1 className="text-3xl absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] font-medium text-white">
           No Movies Created Yet
         </h1>
+      )}
+      {updateMovieId.movieId && (
+        <div className=" fixed z-30 bg-gray-300 rounded-lg md:px-6 px-4 lg:px-8 md:py-8 py-4 lg:py-12 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+          <UpdateForm data = {updateMovieId} setUpdateMovieId={setUpdateMovieId} />
+        </div>
       )}
     </div>
   );

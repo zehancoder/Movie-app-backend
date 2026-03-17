@@ -42,8 +42,6 @@ function Navber() {
     const searchDataFunc = (e) => {
         fetching(search, page);
     }
-    console.log(searchMovies);
-
     return (
         <div id='navber' className={`bg-black px-2 md:px-4 py-5 md:py-7 fixed z-30 w-full left-0 `}>
             <div className='text-[#EBEBEB] lg:float-end lg:w-[70%] xl:w-[70%] flex items-center justify-between gap-5'>

@@ -10,6 +10,8 @@ import Search from "../pages/search/Search.jsx";
 import Movies from "../features/admin/pages/Movies.jsx";
 import Player from "../pages/player/Player.jsx";
 import Like from "../features/likeMovies/Like.jsx";
+import About from "../pages/about/About.jsx";
+import Contact from "../pages/contact/Contact.jsx";
 
 const Routing = () => {
   return (
@@ -27,6 +29,8 @@ const Routing = () => {
       <Route path="/admin/movies" element={<Movies />} />
       <Route path="/movies/vedio/:id" element={<Player />} />
       <Route path="/profile/like" element={<Like />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 };
