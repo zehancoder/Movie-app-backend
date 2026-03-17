@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path')
 const cors = require('cors');
 const connectToDB = require('./config/database');
 const authRouter = require('./routes/auth.route');
@@ -22,6 +23,7 @@ app.use(
     credentials: true
   })
 );
+app.use(express.static('./public'))
 app.use('/', authRouter);
 app.use('/', movieRouter);
 app.use('/', getUserRouter);
@@ -32,5 +34,9 @@ app.use('/', getMeRouter);
 app.use('/', deleteUserRouter);
 app.use('/', likeRouter);
 app.use('/', getLikeMovieRouter)
-connectToDB()
+connectToDB();
+// frontend connect with backend
+app.use('*name', (req, res) => {
+  res.sendFile(path.join(__dirname,'..', '/public/index.html'))
+})
 module.exports = app;

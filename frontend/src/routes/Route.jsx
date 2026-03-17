@@ -12,6 +12,7 @@ import Player from "../pages/player/Player.jsx";
 import Like from "../features/likeMovies/Like.jsx";
 import About from "../pages/about/About.jsx";
 import Contact from "../pages/contact/Contact.jsx";
+import Profile from "../pages/profile/Profile.jsx";
 
 const Routing = () => {
   return (
@@ -31,6 +32,7 @@ const Routing = () => {
       <Route path="/profile/like" element={<Like />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };
