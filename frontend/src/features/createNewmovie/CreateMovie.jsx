@@ -1,16 +1,18 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { createMovieApi } from './api.create';
 
 function CreateMovie() {
 
     const [formData, setFormData] = useState({
         title: '',
-        img_url: '',
+        poster_path: '',
         trailer_youtube_link: '',
         description: '',
         release_date: '',
         genre: '',
-        category: ''
+        category: '',
+        vote_average: 0
     });
 
     const [message, setMessage] = useState('');
@@ -18,21 +20,12 @@ function CreateMovie() {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    const { title, img_url, trailer_youtube_link, description, release_date, genre, category } = formData;
-    console.log(title, img_url);
+    const { title, poster_path, trailer_youtube_link, description, release_date, genre, category, vote_average } = formData;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/create/movie', { title, img_url, trailer_youtube_link, description, release_date, genre, category }, { withCredentials: true }).then((res) => console.log(res.data)).catch((error) => alert(error.response.data.message));
-        setFormData({
-            title: '',
-            img_url: '',
-            trailer_youtube_link: '',
-            description: '',
-            release_date: '',
-            genre: '',
-            category: ''
-        })
+        const response = await createMovieApi(title, poster_path, trailer_youtube_link, description, release_date, genre, category, vote_average);
+        console.log(response)
     }
     return (
         <div className='h-screen flex items-center justify-center '>
@@ -63,12 +56,12 @@ function CreateMovie() {
                     {/* Image URL & Release Date */}
                     <div className="grid grid-cols-2 gap-2 md:gap-4">
                         <div>
-                            <label className="block text-[13px] md:text-sm font-medium text-gray-700">Image URL</label>
+                            <label className="block text-[13px] md:text-sm font-medium text-gray-700">Poster Path</label>
                             <input
                                 type="text"
-                                name="img_url"
+                                name="poster_path"
                                 required
-                                value={formData.img_url}
+                                value={formData.poster_path}
                                 onChange={handleChange}
                                 className="mt-1 block w-full border md:text-base text-[14.8px] border-gray-300 rounded-md p-1 md:p-2 shadow-sm"
                                 placeholder="https://image-link.com"

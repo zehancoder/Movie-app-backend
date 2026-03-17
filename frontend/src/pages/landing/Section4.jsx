@@ -78,7 +78,7 @@ function Section4() {
                     {
                         !loading ? movies.map((movie, idx) => {
                             return idx < 10 && <div style={{ transform: `translateX(-${translate}%)` }} className='  transition ease duration-500 lg:w-[24.5%] w-[48%] sm:w-[33.33%] md:w-[25%] xl:w-[19.23%] 2xl:w-[16.2%] shrink-0 px-2 py-1'>
-                                <MovieCard genre={movie.genre_ids} title={movie.title} posterPath={movie.poster_path} rating={movie.vote_average.toFixed(1)} />
+                                <MovieCard videoId={movie.id} genre={movie.genre_ids} title={movie.title} posterPath={movie.poster_path} rating={movie.vote_average.toFixed(1)} />
                             </div>
                         }) : Array(6).fill(null).map(() => {
                             return <div className='h-full w-full mt-8'>

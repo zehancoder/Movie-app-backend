@@ -5,7 +5,7 @@ const movieSchema = new mongoose.Schema({
         required: [true, 'title is require'],
         default: ''
     },
-    img_url: {
+    poster_path: {
         type: String,
         required: [true, 'images is require']
     },
@@ -28,10 +28,13 @@ const movieSchema = new mongoose.Schema({
         default: ''
     },
     category: {
-        type: String,
-        required: [true, 'category is require'],
-        default: ''
+        type:String,
+        required: [true, 'category is required']
     },
+    vote_average: {
+        type: String,
+        required: [true, 'rating is require'],
+    }
 });
 const movieModel = mongoose.model('movies', movieSchema);
 module.exports = movieModel;

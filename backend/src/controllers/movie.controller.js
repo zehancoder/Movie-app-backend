@@ -9,14 +9,14 @@ const movieController = async (req, res) => {
             message: 'Only admin can change data'
         });
     }
-    const { title, img_url, description, release_date, genre, category, trailer_youtube_link } = req.body;
-    if (title === '' || img_url === '' || description === '' || release_date === "" || genre === "" || category === '' || trailer_youtube_link === '') {
+    const { title, poster_path, description, release_date, genre, category, trailer_youtube_link, vote_average } = req.body;
+    if (title === '' || poster_path === '' || description === '' || release_date === "" || genre === "" || category === '' || trailer_youtube_link === '') {
         return res.status(406).json({
-            message: "Please add " + (title === '' && 'title' || img_url === '' && 'img_url' || description === '' && 'description' || release_date === '' && 'release_date' || genre === '' && 'genre' || category === '' && 'category' || trailer_youtube_link === '' && 'trailer_youtube_link') + 'for create new movie'
+            message: "Please add " + (title === '' && 'title' || poster_path === '' && 'img_url' || description === '' && 'description' || release_date === '' && 'release_date' || genre === '' && 'genre' || category === '' && 'category' || trailer_youtube_link === '' && 'trailer_youtube_link') + 'for create new movie'
         });
     }
     const newMovie = await movieModel.create({
-        title, img_url, description, release_date, category, genre, trailer_youtube_link
+        title,  poster_path, description, release_date, category, genre, trailer_youtube_link, vote_average
     });
     res.status(200).json({
         message: "Successsfully created " + title + 'movie',

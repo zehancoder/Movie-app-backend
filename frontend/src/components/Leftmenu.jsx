@@ -12,6 +12,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { SiGoogleanalytics } from "react-icons/si";
+import { AiFillLike } from 'react-icons/ai';
 
 function Leftmenu() {
     const user = useSelector(state => state.loginUser.data);
@@ -118,12 +119,12 @@ function Leftmenu() {
                     </div>
                     <IoIosArrowForward className='text-[#DEF7FF] text-[17px]' />
                 </div>
-                <NavLink to={'/blog'} className={({ isActive }) =>
+                <NavLink to={'/profile/like'} className={({ isActive }) =>
                     `${isActive ? "linear-bg-noHover" : "nav-links"} px-4 mt-3 cursor-pointer border border-[#36415388] bg-black text-[17px] rounded-lg flex items-center justify-between py-[9px] w-full`
                 }>
                     <div className='flex items-center gap-3'>
-                        <LiaBloggerB className='text-[18px] text-[#808080] link-icons' />
-                        <span className='text-[17px] font-medium text-[#DEF7FF]'>Blog</span>
+                        <AiFillLike className='text-[18px] text-[#808080] link-icons' />
+                        <span className='text-[17px] font-medium text-[#DEF7FF]'>You Liked</span>
                     </div>
                     <IoIosArrowForward className='text-[#DEF7FF] text-[17px]' />
                 </NavLink>

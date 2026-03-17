@@ -5,11 +5,12 @@ import { IoMdVideocam } from "react-icons/io";
 import { IoDiamond } from "react-icons/io5";
 import { IoMdContact } from "react-icons/io";
 import { RiUserSharedLine } from "react-icons/ri";
-import { Link } from 'react-router';
+import { Link, } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdMenu } from "react-icons/md";
 import { FaPlus } from 'react-icons/fa';
-import { leftMenuHandleState } from '../toolkit/slice';
+import { leftMenuHandleState, searchDataState } from '../toolkit/slice';
+import { searchData } from '../pages/search/search';
 
 function Navber() {
     const currentUser = useSelector(state => state.loginUser);
@@ -26,6 +27,23 @@ function Navber() {
     const leftMenuToggleFunc = () => {
         dispatch(leftMenuHandleState())
     }
+    /// searching queries handle
+    const [search, setSearch] = useState('');
+    const [page, setPage] = useState(1);
+    const searchMovies = useSelector(state => state.searchMovies)
+    const fetching = async (query, page) => {
+        const response = await searchData(query, page);
+        if(!response.success){
+            return;
+        }
+        dispatch(searchDataState(response.data.results));
+        setSearch('')
+    }
+    const searchDataFunc = (e) => {
+        fetching(search, page);
+    }
+    console.log(searchMovies);
+
     return (
         <div id='navber' className={`bg-black px-2 md:px-4 py-5 md:py-7 fixed z-30 w-full left-0 `}>
             <div className='text-[#EBEBEB] lg:float-end lg:w-[70%] xl:w-[70%] flex items-center justify-between gap-5'>
@@ -34,7 +52,10 @@ function Navber() {
                     <img className='w-[150px]' src="/Logo.png" alt="" />
                 </div>
 
-                <div className='md:flex hidden w-[95%] md:w-[45%] lg:w-[60%] justify-between text-[14px] sm:text-[15px] md:text-[17px] font-medium bg-[#303030] items-center gap-2 px-2 md:px-4 py-0.5 md:py-1.5 rounded-full'><input className='px-2 py-1 outline-none w-[85%]' type="text" placeholder='Search Your Videos' /><IoSearch className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div>
+                <div className='md:flex hidden w-[95%] md:w-[45%] lg:w-[60%] justify-between text-[14px] sm:text-[15px] md:text-[17px] font-medium bg-[#303030] items-center gap-2 px-2 md:px-4 py-0.5 md:py-1.5 rounded-full'>
+                    <input value={search} onInput={(e) => setSearch(e.target.value)} className='px-2 py-1 outline-none w-[85%]' type="text" placeholder='Search Your Videos' />
+                    <Link to={'/search'} onClick={searchDataFunc}><IoSearch className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></Link>
+                </div>
                 <div className='flex items-center gap-3 justify-between'>
                     {/* <div className='linear-bg navber-hover-effect'><IoIosNotifications className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div> */}
                     {userExist && <div className='linear-bg lg:flex  items-center gap-2 px-3 text-[14px] font-medium md:text-[15px] rounded-full border border-[#b5b5b54b] hover:border-none cursor-pointer py-1.5  hidden'><IoIosNotifications className=' cursor-pointer font-semibold text-2xl px-0.5 py-0.5' /></div>}

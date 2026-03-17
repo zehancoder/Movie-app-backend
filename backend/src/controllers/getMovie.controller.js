@@ -1,3 +1,4 @@
+const likeModel = require("../models/like.model");
 const movieModel = require("../models/movies.model");
 
 const movieGeetingController = async (req, res) => {

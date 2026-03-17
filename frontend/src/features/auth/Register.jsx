@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router'
 import axios from 'axios'
 import { register } from '../apiLayers/auth.api';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerErrMsg, registerUserState, registerUserSuccess } from '../../toolkit/slice';
+import { errorMsgState, registerErrMsg, registerUserState, registerUserSuccess } from '../../toolkit/slice';
 function Register() {
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,18 +26,26 @@ function Register() {
       const response = await register(username, email, password);
       if (!response?.success) {
         dispatch(registerErrMsg(response?.message));
+        dispatch(errorMsgState(response.message))
+
         return
       }
       dispatch(registerUserSuccess(response?.data?.newUser));
       dispatch(registerErrMsg('Success'));
-      window.location.reload()
+      dispatch(errorMsgState('Successfuly Sign up'))
+      setTimeout(() => {
+
+        window.location.reload()
+      }, 2000)
     } catch (error) {
       return error.response.data.message
     }
 
   }
   if (registerData.message === 'Success') {
-    navigate('/')
+    setTimeout(() => {
+      navigate('/')
+    }, 2000);
   }
 
 

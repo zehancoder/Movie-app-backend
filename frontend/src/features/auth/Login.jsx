@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, } from 'react-router'
-import { loginErrMsg, loginUserState, loginUserSuccess } from '../../toolkit/slice';
+import { errorMsgState, loginErrMsg, loginUserState, loginUserSuccess } from '../../toolkit/slice';
 import { login } from '../apiLayers/auth.api';
 
 function Login() {
@@ -22,11 +22,15 @@ function Login() {
             const response = await login(email, password);
             if (!response?.success) {
                 dispatch(loginErrMsg(response?.message));
+                dispatch(errorMsgState(response?.message))
                 return;
             }
             dispatch(loginUserSuccess(response?.data.isUserNotExist));
             dispatch(loginErrMsg('success'));
-            window.location.reload()
+            dispatch(errorMsgState('Successfuly Login'))
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000)
 
         } catch (error) {
             console.log(error);
