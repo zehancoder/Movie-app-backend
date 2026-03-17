@@ -162,7 +162,7 @@ function Movies() {
                     <p className="text-white font-medium text-[17px] leading-5">
                       {movie.title}
                     </p>
-                    <div className="flex items-center justify-between flex-wrap text-[15px] mt-1  font-normal text-[#525cdbcc]">
+                    <div className="grid md:grid-cols-4 grid-cols-2 lg:grid-cols-5 text-[15px] mt-1  font-normal text-[#525cdbcc]">
                       {[movie.genre].map((gen, id) => {
                         return (
                           <div className="flex mr-0.5" key={id}>
