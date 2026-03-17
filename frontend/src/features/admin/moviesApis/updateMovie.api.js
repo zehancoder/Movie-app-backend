@@ -12,7 +12,7 @@ export const updateMovie = async (
 ) => {
   try {
     const response = await axios.patch(
-      `http://localhost:3000/movies/update/${movieId}`,
+      `https://movie-app-backend-szlu.onrender.com/movies/update/${movieId}`,
       {
         title,
         poster_path,

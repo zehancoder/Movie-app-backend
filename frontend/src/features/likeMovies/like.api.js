@@ -1,7 +1,7 @@
 import axios from "axios";
 export const likeApi = async (movieId) => {
     try {
-        const response = await axios.post(`http://localhost:3000/movie/like/${movieId}`, {}, { withCredentials: true });
+        const response = await axios.post(`https://movie-app-backend-szlu.onrender.com/movie/like/${movieId}`, {}, { withCredentials: true });
         console.log(response);
         return {
             success: true,

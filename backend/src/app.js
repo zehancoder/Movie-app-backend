@@ -17,12 +17,10 @@ const getLikeMovieRouter = require('./routes/getLikeMovies.route');
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "http://localhost:5173", // frontend URL
-    credentials: true
-  })
-);
+app.use(cors({
+  origin: "https://movie-app-backend-szlu.onrender.com/",
+  credentials: true
+}));
 app.use(express.static('./public'))
 app.use('/', authRouter);
 app.use('/', movieRouter);

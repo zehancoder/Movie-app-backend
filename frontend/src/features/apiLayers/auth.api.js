@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://movie-app-backend-szlu.onrender.com',
     withCredentials: true
 })
 // register user
