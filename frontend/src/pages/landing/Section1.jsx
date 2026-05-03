@@ -196,7 +196,7 @@ function Section1() {
                                 }
                               >
                                 <Link
-                                  to={`video/${id}`}
+                                  to={`/movies/vedio/${id}`}
                                   className="flex items-center gap-2"
                                 >
                                   <IoPlay /> Play Now
