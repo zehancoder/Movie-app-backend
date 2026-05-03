@@ -13,6 +13,7 @@ import Like from "../features/likeMovies/Like.jsx";
 import About from "../pages/about/About.jsx";
 import Contact from "../pages/contact/Contact.jsx";
 import Profile from "../pages/profile/Profile.jsx";
+import Dashborad from "../features/admin/pages/Dashborad.jsx";
 
 const Routing = () => {
   return (
@@ -33,6 +34,8 @@ const Routing = () => {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/admin/dashboard" element={<Dashborad />} />
+      <Route path="/admin/profile" element={<Profile />} />
     </Routes>
   );
 };
